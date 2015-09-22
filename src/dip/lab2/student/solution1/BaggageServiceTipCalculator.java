@@ -1,6 +1,6 @@
 package dip.lab2.student.solution1;
 
-public class BaggageTipCalculatorStrategy  implements TipCalculatorStrategy{
+public class BaggageServiceTipCalculator  implements TipCalculatorStrategy{
   
     private String BILL_ENTRY_ERR =
             "Error: bill must be between " + this.minBill + " and "
@@ -9,17 +9,20 @@ public class BaggageTipCalculatorStrategy  implements TipCalculatorStrategy{
 
     private double minBill = 0.00;
     private double maxBill = 100.00;
+    private double goodRate = 0.20;
+    private double fineRate = 0.15;
+    private double badRate = 0.10;
     private double baseTipPerBag;
     private int bagCount;
     private ServiceQuality serviceQuality;
 
-    public BaggageTipCalculatorStrategy(ServiceQuality q, int bagCount) {
+    public BaggageServiceTipCalculator(ServiceQuality q, int bagCount) {
         this.setServiceRating(q); // perform validation
         this.setBagCount(bagCount);
         this.baseTipPerBag = 1.0; // set default value
     }
 
-    public BaggageTipCalculatorStrategy( ServiceQuality q ,  int bagCount, double baseTipPerBag) {
+    public BaggageServiceTipCalculator( ServiceQuality q ,  int bagCount, double baseTipPerBag) {
         this.setServiceRating(q);  // perform validation
         this.setBagCount(bagCount);
         this.setBaseTipPerBag(baseTipPerBag);
@@ -32,13 +35,13 @@ public class BaggageTipCalculatorStrategy  implements TipCalculatorStrategy{
 
         switch(serviceQuality) {
             case GOOD:
-                tip = baseTipPerBag * bagCount * (1 + serviceQuality.GOOD.getRate());
+                tip = baseTipPerBag * bagCount * (1 + this.goodRate);
                 break;
             case FAIR:
-                tip = baseTipPerBag * bagCount * (1 + serviceQuality.GOOD.getRate());
+                tip = baseTipPerBag * bagCount * (1 + this.fineRate);
                 break;
             case POOR:
-                tip = baseTipPerBag * bagCount * (1 + serviceQuality.GOOD.getRate());
+                tip = baseTipPerBag * bagCount * (1 + this.badRate);
                 break;
         }
 
@@ -78,10 +81,12 @@ public class BaggageTipCalculatorStrategy  implements TipCalculatorStrategy{
         this.baseTipPerBag = baseTipPerBag;
     }
     
+    @Override
     public final double getMinBill() {
         return minBill;
     }
 
+    @Override
     public final void setMinBill(double minBill) {
         if(minBill >= 0)
             this.minBill = minBill;
@@ -94,6 +99,39 @@ public class BaggageTipCalculatorStrategy  implements TipCalculatorStrategy{
     public final void setMaxBill(double maxBill) {
         if(maxBill > minBill)
             this.maxBill = maxBill;
+    }
+
+    @Override
+    public final void setGoodRate(double goodRate) {
+        if(goodRate > 0)
+            this.goodRate = goodRate;
+    }
+
+    @Override
+    public final void setFineRate(double fineRate) {
+        if(fineRate > 0)
+            this.fineRate = fineRate;
+    }
+
+    @Override
+    public void setBadRate(double badRate) {
+        if(badRate > 0)
+            this.badRate = badRate;
+    }
+
+    @Override
+    public final double getgoodRate() {
+        return goodRate;
+    }
+
+    @Override
+    public final double getFineRate() {
+        return fineRate;
+    }
+
+    @Override
+    public final double getBadRate() {
+        return badRate;
     }
 
 }

@@ -10,15 +10,17 @@ package dip.lab2.student.solution1;
  *
  * @author your name goes here
  */
-public class FoodTipCalculatorStrategy  implements TipCalculatorStrategy {
+public class FoodServiceTipCalculator  implements TipCalculatorStrategy {
    
-
-    private  double minBill = 0.00;
+    private double goodRate = 0.20;
+    private double fineRate = 0.15;
+    private double badRate = 0.10;
+    private double minBill = 0.00;
     private String BILL_ENTRY_ERR = "Error: bill must be greater than or equal to " + minBill;
     private double bill;
     private ServiceQuality serviceQuality;
 
-    public FoodTipCalculatorStrategy(ServiceQuality q, double billAmt) {
+    public FoodServiceTipCalculator(ServiceQuality q, double billAmt) {
         this.setServiceQuality(q);
         this.setBill(billAmt);
     }
@@ -28,13 +30,13 @@ public class FoodTipCalculatorStrategy  implements TipCalculatorStrategy {
 
         switch(serviceQuality) {
             case GOOD:
-                tip = bill * serviceQuality.GOOD.getRate();
+                tip = bill * this.goodRate;
                 break;
             case FAIR:
-                tip = bill * serviceQuality.FAIR.getRate();;
+                tip = bill * this.fineRate;
                 break;
             case POOR:
-                tip = bill * serviceQuality.POOR.getRate();;
+                tip = bill * this.badRate;
                 break;
         }
 
@@ -61,14 +63,48 @@ public class FoodTipCalculatorStrategy  implements TipCalculatorStrategy {
         return serviceQuality;
     }
     
+    @Override
     public final double getMinBill() {
         return minBill;
     }
 
+    @Override
     public final void setMinBill(double minBill) {
         if(minBill >= 0)
             this.minBill = minBill;
     }
 
+    @Override
+    public final void setGoodRate(double goodRate) {
+        if(goodRate > 0)
+            this.goodRate = goodRate;
+    }
+
+    @Override
+    public final void setFineRate(double fineRate) {
+        if(fineRate > 0)
+            this.fineRate = fineRate;
+    }
+
+    @Override
+    public final void setBadRate(double badRate) {
+        if(badRate > 0)
+            this.badRate = badRate;
+    }
+    
+     @Override
+    public final double getgoodRate() {
+        return goodRate;
+    }
+
+    @Override
+    public final double getFineRate() {
+        return fineRate;
+    }
+
+    @Override
+    public final double getBadRate() {
+        return badRate;
+    }
    
 }

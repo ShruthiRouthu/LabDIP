@@ -21,8 +21,8 @@ public class Startup1 {
     
     public static void main(String[] args){
         
-        FoodTipCalculatorStrategy f = new  FoodTipCalculatorStrategy(ServiceQuality.POOR, 100);
-        BaggageTipCalculatorStrategy b = new BaggageTipCalculatorStrategy(ServiceQuality.GOOD,10,2);
+        FoodServiceTipCalculator f = new  FoodServiceTipCalculator(ServiceQuality.POOR, 100);
+        BaggageServiceTipCalculator b = new BaggageServiceTipCalculator(ServiceQuality.GOOD,10,2);
         
         TipCalculatorService service = new TipCalculatorService();
         

@@ -7,17 +7,9 @@ package dip.lab2.student.solution1;
 
 public enum ServiceQuality {
     
-    GOOD(0.20) , FAIR(0.15), POOR(0.10) ;
+    GOOD , FAIR, POOR ;
     
-    private double rate;
-
-    private ServiceQuality(double rate) {
-            this.rate = rate;
-    } 
-
-    public double getRate() {
-        return rate;
-    }
+  
     
     
 }
